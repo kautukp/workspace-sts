@@ -1,0 +1,12 @@
+{"properties": [
+  {
+    "name": "country.names",
+    "type": "java.lang.String",
+    "description": "A description for Countries"
+  },
+  {
+    "name": "amazon.mobile.brand",
+    "type": "java.lang.String",
+    "description": "A description for Amazon mobiles"
+  }
+]}

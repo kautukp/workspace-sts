@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "name": "amazon.mobile",
+      "type": "com.example.propertyreader.model.Amazon",
+      "sourceType": "com.example.propertyreader.model.Amazon"
+    },
+    {
+      "name": "country",
+      "type": "com.example.propertyreader.model.Country",
+      "sourceType": "com.example.propertyreader.model.Country"
+    }
+  ],
+  "properties": [
+    {
+      "name": "amazon.mobile.brand",
+      "type": "java.lang.String",
+      "description": "A description for Amazon mobiles",
+      "sourceType": "com.example.propertyreader.model.Amazon"
+    },
+    {
+      "name": "amazon.mobile.description",
+      "type": "java.lang.String",
+      "sourceType": "com.example.propertyreader.model.Amazon"
+    },
+    {
+      "name": "amazon.mobile.model",
+      "type": "java.lang.String",
+      "sourceType": "com.example.propertyreader.model.Amazon"
+    },
+    {
+      "name": "amazon.mobile.price",
+      "type": "java.lang.Double",
+      "sourceType": "com.example.propertyreader.model.Amazon"
+    },
+    {
+      "name": "country.names",
+      "type": "java.lang.String",
+      "description": "A description for Countries",
+      "sourceType": "com.example.propertyreader.model.Country"
+    },
+    {
+      "name": "country.population",
+      "type": "java.lang.String",
+      "sourceType": "com.example.propertyreader.model.Country"
+    },
+    {
+      "name": "country.weather",
+      "type": "java.lang.String",
+      "sourceType": "com.example.propertyreader.model.Country"
+    }
+  ],
+  "hints": []
+}
