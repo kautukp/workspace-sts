@@ -1,0 +1,5 @@
+1. This is String one
+2. String 2 contains String 1 + String 2
+3. 3rd Statement is complicated
+4. 4th line is combination of one and three
+5. Welcome to Java 8, Lambdas, Stream, Method reference, Functional Interface, Optional class

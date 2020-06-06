@@ -1,0 +1,13 @@
+{
+"userid": 4,
+  "creditCards": [
+    {
+      "type": "Visa",
+      "number": "5116 5660 6407 6904"
+    },
+    {
+      "type": "American Express",
+      "number": "3485 8402 7886 682"
+    }
+  ]
+}
