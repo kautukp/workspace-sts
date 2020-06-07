@@ -34,7 +34,7 @@ public class ListSorter {
 		List<String> list4 = createList();
 		Collections.sort(list4);
 		list4.forEach(System.out::println);
-		
+		System.out.println(“vvff”); 
 		List<String> list5 = createList();
 		list5.stream()
         .sorted()        
