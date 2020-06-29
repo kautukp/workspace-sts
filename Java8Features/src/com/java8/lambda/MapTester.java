@@ -24,7 +24,6 @@ public class MapTester {
 		myMap.put(500, "Customer");
 		myMap.put(600, "NewPerson");
 		myMap.remove(300);
-
 		myMap.forEach((k, v) -> System.out.printf("%s %s%n", k, v));
 	}
 

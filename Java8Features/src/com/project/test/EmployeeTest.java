@@ -5,10 +5,14 @@ package com.project.test;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
+import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.maxBy;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.TreeSet;
+import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 
 /**
@@ -22,21 +26,23 @@ public class EmployeeTest {
 	 */
 	public static void main(String[] args) {
 		
-		findEmployeeNamesWithAgeGreaterThan20();
+		//findEmployeeNamesWithAgeGreaterThan20();
 
-		countEmployeesWithAgeGreaterThan20();
+		//countEmployeesWithAgeGreaterThan20();
 
-		findEmployeeUsingInputString();
+		//findEmployeeUsingInputString();
 
-		sortEmployeesUsingAge();
+		//sortEmployeesUsingAge();
 
 		groupEmployeesByNames();
 
-		joinEmployeeNames();
+		//joinEmployeeNames();
 
-		groupEmployeeByAgeTreeSet();
+		//groupEmployeeByAgeTreeSet();
 		
-		groupEmployeeByAgeUsingMap();
+		//groupEmployeeByAgeUsingMap();
+		
+		//groupByDeptAndEmpIDOfHighestSalary();
 
 	}
 
@@ -44,7 +50,7 @@ public class EmployeeTest {
 	 * Group Employees based on their Age using TreeSet
 	 */
 	private static void groupEmployeeByAgeTreeSet() {
-		Map<Integer, Collection<String>> ageList = createEmployeeList().stream()
+		Map<Integer, Collection<String>> ageList = createEmployeeListNew().stream()
 				.collect(Collectors.groupingBy(Employee::getAge, 
 							Collectors.mapping(Employee::getName, 
 									Collectors.toCollection(TreeSet::new))));
@@ -91,10 +97,12 @@ public class EmployeeTest {
 	 */
 	private static void findEmployeeUsingInputString() {
 		List<Employee> empList = createEmployeeList();
-		Optional<Employee> findEmp = empList.stream().filter(e -> e.getName().equalsIgnoreCase("Mary")).findAny();
+		Optional<Employee> findEmp = empList.stream().filter(e -> e.getName().equalsIgnoreCase("Virat")).findAny();
 
 		if (findEmp.isPresent()) {
 			System.out.print(findEmp.get());
+		} else {
+			findEmp.orElse(null);
 		}
 	}
 
@@ -117,16 +125,40 @@ public class EmployeeTest {
 		System.out.println("Employees whose age is greater than 20 are: " + employeeFilteredList);
 		// employeeFilteredList.forEach((name)-> System.out.println(name));
 	}
+	
+	/**
+	 * Using the list of employees, 
+	 * Group by dept and employeeId of the highest salaried employee.
+	 */
+	private static void groupByDeptAndEmpIDOfHighestSalary() {
+		Comparator<Employee> highestSalary = Comparator.comparing(Employee::getSalary);
+		Map<String, Optional<Employee>> empDeptList = createEmployeeListNew().stream()
+				                              .collect(Collectors.groupingBy(Employee::getDept,
+				                            		  Collectors.reducing(BinaryOperator.maxBy(highestSalary))));
+		empDeptList.forEach((name,salary)->System.out.println("Dept: "+name+" \nHighest Salaried Employee: "+ salary.get().getName() + " : " +salary.get().getSalary()));
+	}
 
 	public static List<Employee> createEmployeeList() {
+		List<Employee> employeeCricketList = new ArrayList<>();
+		
+		employeeCricketList.add(new Employee("Virat Kohli", 19, 333, "Cricket",15000L));
+		employeeCricketList.add(new Employee("Sachin Tendulkar", 37, 100, "Cricket",25000L));
+		employeeCricketList.add(new Employee("MS Dhoni", 37, 777, "Keeper",15000L));
+		employeeCricketList.add(new Employee("Ravi Shastri", 49, 111, "Coach",15000L));
+		
+		return employeeCricketList;
+		
+	}
+	
+	//Employee(String name, int age, int id, String dept, long salary)
+	public static List<Employee> createEmployeeListNew() {
 		List<Employee> employeeList = new ArrayList<>();
-
-		employeeList.add(new Employee("Virat Kohli", 29));
-		employeeList.add(new Employee("Sachin Tendulkar", 37));
-		employeeList.add(new Employee("MS Dhoni", 37));
-		employeeList.add(new Employee("Ravi Shastri", 19));
-		employeeList.add(new Employee("Anushka", 29));
-		employeeList.add(new Employee("Vijay Mallya", 49));
+		employeeList.add(new Employee("Rajan Anand", 22, 111, "Engineering", 1600000));
+		employeeList.add(new Employee("Swati Patil", 23, 222, "Testing", 800000));
+		employeeList.add(new Employee("Vijay Chawda", 23, 334, "Engineering", 1600000));
+		employeeList.add(new Employee("Basant Mahapatra", 29, 444, "Engineering", 600000));
+		employeeList.add(new Employee("Ajay Patel", 32, 555, "Testing", 350000));
+		employeeList.add(new Employee("Swaraj Birla", 32, 111, "Testing", 1350000));
 
 		return employeeList;
 	}

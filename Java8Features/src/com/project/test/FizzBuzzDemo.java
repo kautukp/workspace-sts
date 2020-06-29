@@ -41,7 +41,8 @@ public class FizzBuzzDemo {
 		System.out.println();
 		
 		IntStream ins = IntStream.range(1, 6);
-        ins.mapToObj(x -> text(x)).forEach(System.out::println);
+        ins.mapToObj(x -> text(x))
+        .forEach(System.out::println);
 	}
 
 	private static Object text(int x) {

@@ -72,11 +72,11 @@ public class StreamExample {
 				.sorted()
 				.forEach(System.out::println);
 
-		List<String> checkEmpty = Arrays.asList("Harry", "", "Gary", "Tony", "", "is", "cool");
-		Long count = checkEmpty.stream()
+		List<String> myList = Arrays.asList("Harry", "", "Gary", "Tony", "", "is", "cool");
+		Long checkEmpty = myList.stream()
 				.filter(x -> x.isEmpty())
 				.count();
-		System.out.println("There are " + count + " empty Strings in given String");
+		System.out.println("There are " + checkEmpty + " empty Strings in given String");
 
 		List<String> testList = Arrays.asList("programming", "in", "java", "interview");
 		String sentence = testList.stream()

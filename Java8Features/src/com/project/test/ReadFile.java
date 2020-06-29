@@ -27,7 +27,10 @@ public class ReadFile {
 		try {
 			fileReader = new BufferedReader(new FileReader(new File(filePath)));
 			fileReader.lines().forEach(System.out::println);
-			list = fileReader.lines().collect(Collectors.toList());
+			list = fileReader.lines()
+					.collect(
+							Collectors.toList()
+							);
 		} catch (IOException fileException) {
 			fileException.getMessage();
 		}
