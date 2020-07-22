@@ -1,0 +1,98 @@
+Java 8 Collection API changes 
+
+
+Java 8 Collection API changes - Map
+
+Sorting Map directly with Comparators.
+-------------------------------------------
+Map interface added default methods which gives you comparators for different styles like comparingByKey, comparingByValue.
+
+    Map<String, String> map = new HashMap<>();
+    map.put("C", "c");
+    map.put("B", "b");
+    map.put("Z", "z");
+    List<Map.Entry<String, String>> sortedByKey = map.entrySet().stream().sorted(Map.Entry.comparingByKey())
+        .collect(Collectors.toList());
+    sortedByKey.forEach(System.out::println);
+
+output : 
+
+B=b
+C=c
+Z=z
+
+Iterate over map easily with forEach.
+-------------------------------------------
+If you observe the above example code, while printing I used the method forEach method. This is very revealing feature so far in Map. We all know how ugly is the old fashioned way of iterating and finally implementers added a default method forEach. Now it is super easy to iterate over map just like List.
+
+    Map<String, String> map = new HashMap<>();
+    map.put("C", "c");
+    map.put("B", "b");
+    map.put("Z", "z");
+    map.forEach((k, v) -> System.out.println("Key : " + k + " Value : " + v));
+
+output : 
+
+Key : B Value : b
+Key : C Value : c
+Key : Z Value : z
+
+
+Get rid off ugly if-else condition, use getOrDefault method.
+-------------------------------------------------------------------
+Legacy code for checking containsKey got moved to default method getOrDefault. This method returns the value to which the specified key is mapped, otherwise returns the given defaultValue if this map contains no mapping for the key.
+
+    Map<String, String> map = new HashMap<>();
+    map.put("C", "c");
+    String val = map.getOrDefault("B", "Nah!");
+    System.out.println(val); // prints Nah!
+
+Replace and Remove utilities.
+---------------------------------
+New utility default methods have been added now. replaceAll Can replace all the values in a single attempt
+
+    Map<String, String> map = new HashMap<>();
+    map.put("C", "c");
+    map.put("B", "b");
+    map.replaceAll((k, v) -> "x"); // values is "x" for all keys.  
+And replace(K key, V oldValue, V newValue) method replaces the entry for the specified key only if currently mapped to the specified value. In the same way you can use replace, remove methods to check by key and values pairs together.
+
+Do not override keys accidentally use putIfAbsent
+-------------------------------------------------------
+As the method name is self explanatory, here is an example.
+
+    Map<String, String> map = new HashMap<>();
+    map.put("C", "c");
+    map.put("B", "b");
+    map.putIfAbsent("B", "x");
+    System.out.println(map.get("B")); // prints "b"
+
+
+operate directly on values.
+-----------------------------
+Gone are the days when you needed to get the value for specific keys, process it and put them back. Now you can directly modify with help of compute method.
+
+    Map<String, String> map = new HashMap<>();
+    map.put("C", "c");
+    map.put("B", "b");
+    map.compute("B", (k, v) -> v.concat(" - new "));
+    System.out.println(map.get("B")); // prints "b - new"
+
+Conditional computes are also available. Look at computeIfPresent, computeIfAbsent methods.
+
+To merge maps use merge method.
+---------------------------------------
+This is little tricky and more useful when you are combining maps or appending values for duplicated keys.
+
+Docs says
+
+If the specified key is not already associated with a value or is associated with null, associates it with the given non-null value. Otherwise, replaces the associated value with the results of the given remapping function, or removes if the result is null.
+
+To demonstrate it simply, just merge the values for a key with old and new, see the below example.
+
+    Map<String, String> map = new HashMap<>();
+    map.put("C", "c");
+    map.put("B", "b");
+    map.merge("B", "NEW", (v1, v2) -> v1 + v2);
+    System.out.println(map.get("B")); // prints bNEW
+
